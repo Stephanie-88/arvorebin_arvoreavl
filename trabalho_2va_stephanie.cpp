@@ -6,13 +6,21 @@
 
 #define TAM 30
 
-typedef struct celula {
+typedef struct celula_bin {
 	char palavra[TAM];
 	int freq;
-	struct celula *dir, *esq, *pai;
-}noh;
+	struct celula_bin *dir, *esq, *pai;
+}noh_bin;
 
-typedef noh *arvore;
+typedef noh_bin *arvore_bin;
+
+typedef struct celula_avl {
+	char palavra[TAM];
+	int fb, freq;
+	struct celula_avl *dir, *esq, *pai;
+}noh_avl;
+
+typedef noh_avl *arvore_avl;
 
 //Front
 void interface() {
@@ -29,12 +37,18 @@ void interface() {
 }
 
 //Back
+
+
+
+
+
 void learquivo() {
 	char arq[TAM];
 	
 	fflush(stdin);
 	printf("\t\nDigite o nome do arquivo: ");
 	gets(arq);
+	printf("\t\nEscolha o mecanismo de busca e armazenamento: ");
 	
 	
 }
@@ -44,7 +58,7 @@ int main() {
 	setlocale(LC_ALL,"Portuguese");
 	
 	int Op;
-	arvore abin = NULL;
+	arvore_bin abin = NULL;
 	
 	
 	do{
