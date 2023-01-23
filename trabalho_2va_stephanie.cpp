@@ -37,18 +37,79 @@ void interface() {
 }
 
 //Back
+noh_bin *criacelula(char palavra[TAM]){
+
+	noh_bin *novo = (noh_bin*)malloc(sizeof(noh_bin));
+	
+	strcpy(novo->palavra, palavra);
+	novo->dir = NULL;
+	novo->esq = NULL;
+	novo->pai = NULL;
+	
+	return novo;
+}//cria a celula e atribui valores
+
+arvore_bin insere (arvore_bin r, noh_bin *novo) { 
+	arvore_bin aux;
+	 
+    if (r == NULL) return novo;
+    if (r->palavra > novo->palavra) {
+	
+		if(r->esq->pai == NULL) r->esq->pai = r;
+    	r->esq = insere (r->esq, novo);
+	}
+    else {
+    	if(r->dir->pai == NULL) r->dir->pai = r;
+    	r->dir = insere (r->dir, novo);
+	}
+    return r;
+}//insere a celula criada na arvore
 
 
 
+char arq[TAM];
 
-
-void learquivo() {
-	char arq[TAM];
+void escolhearvore(arvore_bin r) {
+	FILE *arquivo;
+	int Op;
 	
 	fflush(stdin);
-	printf("\t\nDigite o nome do arquivo: ");
+	printf("\t\nDigite o nome do arquivo com a extensão: ");
 	gets(arq);
-	printf("\t\nEscolha o mecanismo de busca e armazenamento: ");
+	
+	arquivo = fopen(arq,"r");
+	if(arq == NULL) {
+		printf("Problemas para abrir o arquivo.");
+		exit (EXIT_FAILURE);
+	}
+	else{
+		
+		do{
+				printf("\t\nEscolha o mecanismo de busca e armazenamento: \n");
+				printf("\t\n1 - Árvore Binária de Busca. ");
+				printf("\t\n2 - Árvore Balanceada AVL");
+				printf("\t\n0 - Menu inicial");
+			
+			switch(Op) {
+			case 1:
+				//chama arvbin
+				
+				while((palavra=fgetc(arquivo)) =! EOF) {
+					insere(r,criacelula)
+				}//trocar planejamento de projeto.
+				break;
+			case 2:
+				//chama arvavl
+				break;
+			default:
+				printf("\n\n\tOpção inválida! Digite novamente, por favor.\n\n\n");
+				system("pause");
+				system("cls");
+			}
+		}while(Op != 0);
+		
+	}
+	
 	
 	
 }
