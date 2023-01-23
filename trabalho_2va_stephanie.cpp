@@ -49,18 +49,21 @@ noh_bin *criacelula(char palavra[TAM]){
 	return novo;
 }//cria a celula e atribui valores
 
-arvore_bin insere (arvore_bin r, noh_bin *novo) { 
+arvore_bin insere (arvore_bin r, noh_bin *novo, char palavra[]) { 
 	arvore_bin aux;
 	 
     if (r == NULL) return novo;
-    if (r->palavra > novo->palavra) {
+    if (strcmp(r->palavra, novo->palavra)<0) {
 	
 		if(r->esq->pai == NULL) r->esq->pai = r;
-    	r->esq = insere (r->esq, novo);
+    	r->esq = insere (r->esq, novo, palavra);
 	}
-    else {
+    else if(strcmp(r->palavra, novo->palavra)>0){
     	if(r->dir->pai == NULL) r->dir->pai = r;
-    	r->dir = insere (r->dir, novo);
+    	r->dir = insere (r->dir, novo, palavra);
+	}
+	else {
+		r->freq++;
 	}
     return r;
 }//insere a celula criada na arvore
@@ -72,6 +75,7 @@ char arq[TAM];
 void escolhearvore(arvore_bin r) {
 	FILE *arquivo;
 	int Op;
+	char palavra[TAM];
 	
 	fflush(stdin);
 	printf("\t\nDigite o nome do arquivo com a extensão: ");
@@ -94,9 +98,9 @@ void escolhearvore(arvore_bin r) {
 			case 1:
 				//chama arvbin
 				
-				while((palavra=fgetc(arquivo)) =! EOF) {
-					insere(r,criacelula)
-				}//trocar planejamento de projeto.
+				while((palavra = fgetc(arquivo)) =! EOF) {
+					r = insere(r, criacelula, palavra);
+				}
 				break;
 			case 2:
 				//chama arvavl
